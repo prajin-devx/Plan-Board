@@ -1,0 +1,937 @@
+# PROJECT: Build a Premium, Non-AI Personal Productivity Application
+
+Act as a senior product designer, UX researcher, frontend engineer, backend engineer, and software architect.
+
+Your mission is to design and build a complete, polished, production-minded, cross-platform productivity application combining powerful task management, habit tracking, task intensity, personal planning, and satisfying daily progress.
+
+This must NOT look or feel like a generic to-do list template.
+
+The application should combine the visual quality of a premium consumer product, the reliability of a serious productivity tool, and the simplicity of an application someone can comfortably use every day.
+
+**The user experience and visual design are the highest priorities. Functionality, reliability, accessibility, and maintainability are equally essential foundations.**
+
+Do not build an AI-powered application. All task organization, scheduling, scoring, filtering, statistics, and recommendations must use conventional, deterministic software logic.
+
+## 1. PRODUCT VISION
+
+Build a personal productivity system that helps users organize their lives without making organization itself feel like work.
+
+The product must support three fundamental activities:
+
+1. Manage tasks and projects.
+2. Build sustainable habits.
+3. Understand effort and prioritize work through a dedicated task-intensity system.
+
+The application should feel effortless for beginners while providing enough depth for advanced users.
+
+Core product principles:
+
+- Beautiful but functional.
+- Powerful but not complicated.
+- Fast task entry.
+- Minimal unnecessary interaction.
+- Calm and satisfying daily usage.
+- Reliable synchronization across devices.
+- Respectful notifications.
+- Flexible planning for unpredictable days.
+- No guilt-based productivity mechanics.
+- No AI dependencies.
+- No manipulative engagement mechanics.
+- Useful free functionality.
+
+The primary differentiator is the combination of a visually exceptional interface, task intensity, flexible habit tracking, and an emotionally comfortable daily planning experience.
+
+## 2. TARGET PLATFORMS
+
+Create a responsive application that works across:
+
+- Desktop browsers.
+- Mobile browsers.
+- Tablets.
+- Installable mobile PWAs.
+- Installable desktop PWAs where supported.
+
+Use an architecture that allows future Android and iOS packaging without rewriting the entire application.
+
+Recommended stack:
+
+- React.
+- TypeScript.
+- Vite.
+- Tailwind CSS.
+- A consistent, reusable component system.
+- Lucide icons.
+- Supabase for authentication, PostgreSQL, and cloud synchronization.
+- IndexedDB for local persistence and offline functionality.
+- A reliable synchronization layer between local data and the cloud.
+
+You may choose a better-supported equivalent if a particular technical requirement cannot be met with this stack, but explain the trade-off.
+
+Do not introduce unnecessary libraries.
+
+Keep the architecture modular, strongly typed, testable, and easy to maintain.
+
+## 3. VISUAL DESIGN DIRECTION
+
+Design a premium, editorial, modern productivity interface.
+
+Avoid the appearance of a generic admin dashboard, a basic Bootstrap template, or a typical AI-generated SaaS landing page.
+
+The interface should feel intentionally art-directed.
+
+### Visual characteristics
+
+- Refined typography.
+- Strong typographic hierarchy.
+- Beautiful spacing and alignment.
+- Restrained use of color.
+- Subtle borders and layered surfaces.
+- Sophisticated visual density.
+- Smooth, purposeful transitions.
+- Carefully designed empty states.
+- Consistent iconography.
+- High-quality charts.
+- Elegant task cards.
+- Beautiful progress indicators.
+- Excellent light and dark themes.
+
+Use a design system rather than styling each screen independently.
+
+Create reusable design tokens for colors, typography, spacing, radii, shadows, borders, and motion.
+
+Choose a distinctive visual identity instead of copying the interface of an existing competitor.
+
+A suitable starting direction is warm off-white surfaces, near-black typography, muted neutral borders, and a distinctive accent color used selectively for actions and progress. Provide a coherent dark theme.
+
+Do not use excessive gradients, giant decorative blobs, excessive glassmorphism, meaningless charts, or animations that interfere with productivity.
+
+### Typography
+
+Use a carefully selected combination of a modern interface sans-serif and, if appropriate, a restrained editorial display face.
+
+Establish clear levels for:
+
+- Page titles.
+- Section headings.
+- Task titles.
+- Supporting text.
+- Metadata.
+- Numeric metrics.
+- Small labels.
+
+Task names must remain readable, even when long.
+
+### Interaction quality
+
+Every interactive element must have appropriate hover, focus, pressed, loading, success, disabled, and error states.
+
+Use subtle animations for:
+
+- Completing a task.
+- Checking off a habit.
+- Opening task details.
+- Changing views.
+- Updating progress.
+- Dismissing a completed item.
+
+Respect reduced-motion preferences.
+
+Use optimistic updates where appropriate, with reliable rollback and error handling if persistence fails.
+
+## 4. APPLICATION NAVIGATION
+
+Create a consistent navigation system.
+
+Primary destinations:
+
+1. Today.
+2. Inbox.
+3. Tasks.
+4. Calendar.
+5. Habits.
+6. Projects.
+7. Insights.
+8. Settings.
+
+On desktop, use a refined collapsible sidebar.
+
+On mobile, use a compact bottom navigation for the most important destinations, with secondary destinations accessible through a well-designed menu.
+
+Include a persistent quick-add action that is easy to reach on every major screen.
+
+Do not cram every feature into the primary mobile navigation.
+
+Navigation must work correctly. Do not create buttons that lead nowhere.
+
+## 5. TODAY DASHBOARD
+
+The Today screen is the heart of the product.
+
+It should answer three questions immediately:
+
+- What needs my attention?
+- What should I work on next?
+- How is my day progressing?
+
+Include:
+
+### A. Daily header
+
+Display:
+
+- Current date and weekday.
+- A welcoming but restrained greeting.
+- Daily completion summary.
+- A compact progress indicator.
+- Access to the daily planning flow.
+
+Avoid excessive motivational quotes.
+
+### B. Today's focus
+
+Create a dedicated section for the user's most important tasks.
+
+Allow users to choose up to three daily focus tasks.
+
+Make this a useful optional limit, not a restriction on the total number of tasks.
+
+Focus tasks should be visually distinct from ordinary tasks without creating a completely separate task system.
+
+### C. Task list
+
+Each task row should display:
+
+- Completion checkbox.
+- Task title.
+- Optional project or category.
+- Priority indicator.
+- Intensity indicator.
+- Due time when relevant.
+- Optional duration estimate.
+- Optional subtask progress.
+- Contextual actions.
+
+Provide quick completion, editing, rescheduling, duplication, and deletion.
+
+Support drag-and-drop ordering where appropriate.
+
+Use expandable task details rather than forcing users through complicated forms.
+
+### D. Habits today
+
+Display scheduled habits as compact, interactive cards or rows.
+
+Users should be able to record completion without opening a separate screen.
+
+Show progress toward weekly targets where useful.
+
+### E. Upcoming commitments
+
+Show relevant upcoming tasks and deadlines in a compact section.
+
+Do not flood the dashboard with distant future items.
+
+### F. Daily review
+
+Provide a short review flow that lets users:
+
+- See completed tasks.
+- Review unfinished tasks.
+- Reschedule tasks.
+- Remove tasks that are no longer relevant.
+- Choose tomorrow's focus.
+
+Never automatically carry every unfinished task forward without giving the user control.
+
+### G. Empty states
+
+When the user has no tasks, display an attractive, useful empty state with a clear next action.
+
+Never make an empty dashboard look broken or unfinished.
+
+## 6. TASK MANAGEMENT ENGINE
+
+Implement a real task management system.
+
+Every task should support:
+
+- Unique identifier.
+- Title.
+- Optional description.
+- Status.
+- Priority.
+- Intensity.
+- Creation timestamp.
+- Update timestamp.
+- Optional start date.
+- Optional due date.
+- Optional scheduled time.
+- Optional duration estimate.
+- Optional project.
+- Optional labels.
+- Optional subtasks.
+- Optional checklist.
+- Optional recurrence rule.
+- Optional reminder settings.
+- Optional completion timestamp.
+- Ordering information.
+- Archive and deletion states where appropriate.
+
+Distinguish between a task's scheduled date and its actual deadline.
+
+Users should be able to plan when to work on a task separately from when it must be finished.
+
+Support:
+
+- One-time tasks.
+- Recurring tasks.
+- Subtasks.
+- Checklists.
+- Projects and sections.
+- Labels.
+- Search.
+- Filters.
+- Sorting.
+- Bulk actions.
+- Task duplication.
+- Archiving.
+- Undo for destructive actions.
+- Task history where useful.
+- Completed-task history.
+
+Use proper date and timezone handling.
+
+Recurring tasks must behave predictably when completed, skipped, rescheduled, or edited.
+
+Editing one occurrence of a recurring task must not unintentionally change every other occurrence.
+
+## 7. SIGNATURE FEATURE: TASK INTENSITY
+
+Implement a distinctive intensity system separate from priority.
+
+Priority represents importance or urgency.
+
+Intensity represents the effort, concentration, or energy a task is expected to require.
+
+Use five customizable levels:
+
+LEVEL 1 — LIGHT
+
+Quick, low-effort actions.
+
+LEVEL 2 — EASY
+
+Simple tasks requiring a little attention.
+
+LEVEL 3 — MODERATE
+
+Tasks requiring sustained attention.
+
+LEVEL 4 — DEEP
+
+Challenging work requiring meaningful concentration.
+
+LEVEL 5 — INTENSE
+
+Demanding work that may require substantial preparation or focused effort.
+
+Use compact, attractive visual indicators.
+
+Potential representations include five segments, subtle intensity bars, or a clearly labeled level.
+
+Ensure the representation remains understandable without relying exclusively on color.
+
+Allow users to filter tasks by intensity.
+
+Allow intensity to be changed directly from the task row or task detail panel.
+
+Provide sensible defaults and never force users to assign intensity to every task.
+
+### Intensity-aware planning
+
+Use deterministic rules to help users organize their work.
+
+Examples:
+
+- Display intense tasks prominently when the user has explicitly marked them as important.
+- Let users create a low-energy view for lighter tasks.
+- Let users create a deep-work view for high-intensity tasks.
+- Display estimated total workload for a selected period.
+- Show the distribution of task intensity across the day or week.
+- Allow users to manually balance their workload.
+
+Do not pretend to measure the user's actual energy.
+
+Do not automatically assign task intensity using AI.
+
+Do not use arbitrary mathematical scores that obscure how prioritization works.
+
+Explain every calculated workload metric clearly.
+
+## 8. HABIT TRACKER
+
+Build a complete habit tracking module.
+
+Each habit should support:
+
+- Name.
+- Optional description.
+- Icon.
+- Optional category.
+- Frequency.
+- Selected weekdays.
+- Weekly target.
+- Start date.
+- Optional end date.
+- Reminder preferences.
+- Tracking method.
+- Target value where applicable.
+- Unit where applicable.
+- Active or archived status.
+
+### Tracking methods
+
+Support:
+
+1. Binary completion: done or not done.
+2. Numeric tracking: record a quantity.
+3. Duration tracking: record time spent.
+
+Examples include reading, practicing an instrument, exercising, and drinking water.
+
+These are illustrative habit types, not mandatory defaults.
+
+### Habit scheduling
+
+Support:
+
+- Daily habits.
+- Selected weekdays.
+- Custom weekly targets.
+- Multiple completions when appropriate.
+- Rest days.
+- Flexible schedules.
+- Historical logging.
+- Editing an accidental entry.
+- Skipping a scheduled occurrence.
+- Pausing a habit.
+- Archiving a habit.
+
+Make the difference between completed, skipped, missed, and not scheduled explicit.
+
+A habit that was not scheduled should not be counted as a failure.
+
+### Habit analytics
+
+Display:
+
+- Current streak.
+- Best streak.
+- Weekly completion rate.
+- Monthly completion rate.
+- Historical calendar.
+- Recent progress.
+- Long-term consistency.
+
+Calculate streaks from actual scheduled occurrences rather than blindly counting consecutive calendar days.
+
+Allow users to correct mistakes without losing unrelated history.
+
+Do not punish users for missing a day.
+
+### Habit creation experience
+
+Provide a beautiful, minimal creation flow.
+
+Ask only for essential information initially.
+
+Place advanced scheduling, targets, and reminders behind optional settings.
+
+The user should be able to create a simple habit in seconds.
+
+## 9. CALENDAR AND SCHEDULING
+
+Create useful calendar views:
+
+- Agenda.
+- Day.
+- Week.
+- Month.
+
+Allow users to move tasks between dates using a calendar interface.
+
+Show scheduled tasks and deadlines distinctly.
+
+Make calendar visibility configurable.
+
+Avoid making every task appear as an immovable calendar appointment.
+
+Support rescheduling, overdue tasks, and recurring tasks correctly.
+
+If calendar integrations are introduced, implement genuine connections rather than decorative controls.
+
+Do not require a third-party calendar integration for basic task scheduling.
+
+## 10. QUICK CAPTURE AND PRODUCTIVITY SHORTCUTS
+
+Fast task entry is essential.
+
+Implement:
+
+- Global quick-add interface.
+- Keyboard shortcut to open quick-add.
+- Enter-to-save behavior where appropriate.
+- Quick priority selection.
+- Quick intensity selection.
+- Optional date and project assignment.
+- Natural, readable date shortcuts using conventional parsing.
+- Keyboard navigation.
+- Contextual task menus.
+- Searchable command palette.
+
+All parsing must be deterministic.
+
+For example, if a user enters a task followed by an unambiguous supported date, the application may interpret the date and show the result before saving.
+
+Never silently interpret ambiguous input as a deadline.
+
+Always allow the user to correct the parsed result.
+
+## 11. FOCUS MODE
+
+Implement an optional focus mode.
+
+Features:
+
+- Select a task.
+- Start a focus session.
+- Choose a duration or use an open-ended timer.
+- Pause and resume.
+- Finish or cancel the session.
+- Record completed focus sessions.
+- Display time spent on a task.
+- Show session history.
+
+Do not force users to follow the Pomodoro technique.
+
+Support longer sessions for people who prefer uninterrupted work.
+
+Keep the interface minimal while the timer is running.
+
+Do not add distracting gamification.
+
+## 12. INSIGHTS AND PROGRESS
+
+Create a visually refined Insights page.
+
+Show meaningful information rather than vanity metrics.
+
+Include:
+
+- Tasks completed over time.
+- Completion trends.
+- Habit consistency.
+- Weekly and monthly summaries.
+- Focus time.
+- Distribution of task intensity.
+- Overdue-task trends.
+- Personal progress history.
+
+Make time ranges selectable.
+
+Use accessible charts with clear labels, tooltips, and empty states.
+
+Do not fabricate statistics.
+
+Calculate metrics from actual stored data and define each metric consistently.
+
+Clearly distinguish estimated workload from measured time spent.
+
+The purpose is to help users understand their routines and make better decisions, not to judge their productivity.
+
+## 13. DAILY ENGAGEMENT WITHOUT MANIPULATION
+
+Create an experience that people naturally want to return to.
+
+Use:
+
+- Satisfying completion feedback.
+- Visible progress.
+- Subtle transitions.
+- Personalized themes.
+- Useful widgets where the platform supports them.
+- Optional daily planning reminders.
+- Optional evening review reminders.
+- Weekly summaries.
+- A sense of continuity through historical progress.
+
+Avoid:
+
+- Punitive streak resets.
+- Shame-based messages.
+- Artificial scarcity.
+- Excessive notifications.
+- Endless reward animations.
+- Mandatory daily check-ins.
+- Fake social pressure.
+- Notifications designed solely to increase screen time.
+
+A user should feel better after using the application, not anxious about keeping it alive.
+
+## 14. CROSS-PLATFORM SYNCHRONIZATION
+
+Cross-device synchronization is a core requirement.
+
+A task created on one device must eventually appear on the user's other signed-in devices.
+
+A completion recorded on mobile must propagate to desktop.
+
+A habit logged offline must be preserved and synchronized when connectivity returns.
+
+Implement:
+
+- Email-based authentication.
+- Secure session handling.
+- Optional supported OAuth sign-in.
+- Per-user data isolation.
+- Local persistence.
+- Offline task creation and editing.
+- A queued synchronization mechanism.
+- Background synchronization when supported.
+- Retry handling.
+- Duplicate prevention.
+- Conflict resolution.
+- Clear synchronization status.
+- Loading and error states.
+- Account sign-out.
+- Account data export.
+- Account deletion.
+
+Use stable identifiers and appropriate timestamps.
+
+Do not treat the last device to connect as automatically correct in every conflict.
+
+Define explicit conflict-resolution rules for simultaneous edits.
+
+Never silently discard unsynchronized changes.
+
+Clearly communicate when data is waiting to sync.
+
+Use secure database access policies so users cannot read or modify other users' private data.
+
+Never expose server secrets in client-side code.
+
+### Offline behavior
+
+The core experience must remain useful without an internet connection.
+
+Users must be able to:
+
+- View previously loaded tasks and habits.
+- Create tasks.
+- Edit tasks.
+- Complete tasks.
+- Record habit progress.
+- Review locally available history.
+
+Queue supported changes and synchronize them later.
+
+Document platform limitations for background synchronization and notifications.
+
+Do not claim synchronization works until it has been tested on multiple browser sessions or devices.
+
+## 15. DATA ARCHITECTURE
+
+Design a normalized, maintainable database.
+
+Potential entities:
+
+- Profiles.
+- Tasks.
+- Projects.
+- Labels.
+- Task-label relationships.
+- Subtasks.
+- Recurrence rules.
+- Task completion history.
+- Habits.
+- Habit schedules.
+- Habit logs.
+- Focus sessions.
+- Reminder preferences.
+- User settings.
+- Synchronization metadata.
+
+Choose the final schema based on the actual requirements.
+
+Use proper foreign keys, indexes, timestamps, and constraints.
+
+Define database migrations and row-level security policies.
+
+Store only necessary information.
+
+Keep recurring-task definitions separate from individual occurrences when needed.
+
+Keep habit definitions separate from habit logs so historical records remain meaningful when a habit changes.
+
+Do not use local storage as the sole persistent database for a cross-device application.
+
+## 16. SETTINGS AND PERSONALIZATION
+
+Include:
+
+- Light theme.
+- Dark theme.
+- System theme.
+- Accent-color selection.
+- Week-start preference.
+- Timezone preference.
+- Date-format preference.
+- Time-format preference.
+- Default task priority.
+- Default task intensity.
+- Notification settings.
+- Habit reminder settings.
+- Reduced-motion preference.
+- Data export.
+- Account management.
+
+Sync appropriate preferences across devices while allowing platform-specific preferences where necessary.
+
+Provide a reset-to-default option.
+
+## 17. ACCESSIBILITY AND RESPONSIVENESS
+
+Follow accessible interface practices.
+
+Requirements:
+
+- Keyboard accessibility.
+- Visible focus indicators.
+- Screen-reader labels.
+- Adequate contrast.
+- Meaningful form labels.
+- Accessible validation messages.
+- Large enough touch targets.
+- Reduced-motion support.
+- Responsive layouts.
+- No horizontal overflow on mobile.
+- Clear error recovery.
+- Semantic HTML.
+
+Never communicate priority or intensity through color alone.
+
+Test long task titles, large task lists, empty states, and narrow screens.
+
+## 18. PERFORMANCE AND RELIABILITY
+
+The application should feel fast.
+
+Requirements:
+
+- Fast initial rendering.
+- Efficient list rendering.
+- Minimal unnecessary re-renders.
+- Responsive interactions.
+- Lazy loading where appropriate.
+- Efficient database queries.
+- Error boundaries.
+- Graceful network-failure handling.
+- Optimistic updates with rollback.
+- No accidental duplicate submissions.
+- No data loss during synchronization.
+- No blocking animations.
+- No unnecessary background polling.
+
+Avoid premature optimization, but measure and fix actual bottlenecks.
+
+## 19. FREE-TIER PHILOSOPHY
+
+Design the core product to be genuinely useful without payment.
+
+Do not introduce advertisements or forced upgrade modals.
+
+Core task management, basic habit tracking, essential scheduling, and reliable synchronization should not depend on a paid subscription.
+
+If a future premium tier is introduced, it should offer optional advanced capabilities rather than holding users' basic productivity data hostage.
+
+Do not implement payments unless explicitly requested.
+
+## 20. REQUIRED SCREENS
+
+Build and connect the following screens:
+
+1. Authentication.
+2. First-time onboarding.
+3. Today dashboard.
+4. Inbox.
+5. All tasks.
+6. Task detail and editing.
+7. Projects.
+8. Project detail.
+9. Calendar.
+10. Habit dashboard.
+11. Habit creation.
+12. Habit detail and history.
+13. Focus mode.
+14. Insights.
+15. Search and command palette.
+16. Daily review.
+17. Settings.
+18. Responsive mobile layouts.
+19. Useful empty states.
+20. Loading, error, offline, and synchronization states.
+
+Every screen must share the same design system.
+
+## 21. FIRST-TIME ONBOARDING
+
+Create a short onboarding flow.
+
+Ask the user to:
+
+- Choose a theme.
+- Select a few optional areas of life, such as study, work, health, or personal projects.
+- Create their first task.
+- Optionally create a habit.
+
+Do not require users to populate an elaborate productivity system before they can use the application.
+
+Provide a skip option.
+
+Start with a clean, usable dashboard.
+
+## 22. IMPLEMENTATION REQUIREMENTS
+
+Do not stop after producing a design or a static prototype.
+
+Build a working application.
+
+Before implementation:
+
+1. Establish the project structure.
+2. Define the design system.
+3. Plan the data model.
+4. Identify core user flows.
+5. Define synchronization behavior.
+6. Establish an implementation sequence.
+
+Then implement the application in logical stages.
+
+Recommended order:
+
+Stage 1: Design system, navigation, responsive layout, and task CRUD.
+
+Stage 2: Priority, task intensity, projects, subtasks, and recurring tasks.
+
+Stage 3: Habit tracking, schedules, historical logs, and streak calculations.
+
+Stage 4: Calendar, daily review, and focus mode.
+
+Stage 5: Authentication, persistence, cloud synchronization, and offline support.
+
+Stage 6: Insights, settings, accessibility, and polish.
+
+The order may change if a dependency requires it, but maintain a coherent architecture.
+
+Build complete vertical slices rather than creating many unfinished screens.
+
+## 23. FUNCTIONALITY RULES
+
+Every visible control must have a real purpose.
+
+Do not leave:
+
+- Dead buttons.
+- Empty navigation links.
+- Fake charts.
+- Nonfunctional search.
+- Decorative filters.
+- Forms that do not save.
+- Buttons that only change their appearance.
+- Hardcoded completion statistics.
+- Pretend cloud synchronization.
+- Unimplemented settings presented as functional.
+
+If a feature is not implemented, do not present it as working.
+
+Use realistic sample data only in an explicitly identified demo mode.
+
+Do not make demo data appear to be a signed-in user's saved data.
+
+Include helpful loading, success, empty, and failure states.
+
+## 24. TESTING AND ACCEPTANCE CRITERIA
+
+Before declaring the application complete, verify:
+
+TASKS
+- Create, edit, complete, reopen, archive, and delete tasks.
+- Create and complete subtasks.
+- Change priority and intensity.
+- Search and filter tasks.
+- Reschedule overdue tasks.
+- Handle recurring tasks correctly.
+
+HABITS
+- Create a daily habit.
+- Create a weekly habit.
+- Record numeric and duration-based progress.
+- Correct an earlier entry.
+- Skip a scheduled occurrence.
+- Pause and resume a habit.
+- Calculate streaks correctly.
+- Preserve historical records.
+
+SYNC
+- Create a task on one signed-in session and verify it on another.
+- Complete a task on one device and verify the change elsewhere.
+- Test offline edits and reconnection.
+- Verify that concurrent edits do not silently destroy data.
+- Verify user data isolation.
+
+UI
+- Test mobile, tablet, and desktop layouts.
+- Verify dark and light themes.
+- Test keyboard navigation.
+- Verify that every visible control works.
+- Test long task titles and empty states.
+- Check for horizontal overflow.
+
+RELIABILITY
+- Test loading and error states.
+- Verify form validation.
+- Test repeated clicks.
+- Verify undo behavior.
+- Check recurring-task edge cases.
+- Confirm that failed requests do not silently lose changes.
+
+Run available automated tests, type checking, linting, and production builds.
+
+Fix discovered issues instead of merely documenting them.
+
+## 25. FINAL QUALITY BAR
+
+The final result should feel like a coherent premium productivity product, not a collection of unrelated features.
+
+The interface must be beautiful enough to make a strong first impression.
+
+The daily workflow must be simple enough to become a natural routine.
+
+The task system must be powerful enough for demanding users.
+
+The habit system must support consistency without guilt.
+
+The intensity system must provide practical value beyond a standard priority flag.
+
+Synchronization must preserve users' work.
+
+The code must remain maintainable.
+
+Most importantly, every feature must justify its existence by making the user's life easier.
+
+**Do not prioritize feature quantity over experience quality.**
+
+Build a small number of excellent interactions before adding unnecessary complexity.
+
+Start by establishing the design system and implementing the Today dashboard with working task creation, completion, and intensity controls. Then continue building the remaining features without compromising the established visual quality.

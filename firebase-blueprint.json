@@ -1,0 +1,153 @@
+{
+  "entities": {
+    "users": {
+      "title": "UserProfile",
+      "description": "User account settings and personalization preferences",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 512 },
+        "theme": { "type": "string", "enum": ["system", "light", "dark", "warm"] },
+        "accentColor": { "type": "string", "maxLength": 32 },
+        "weekStart": { "type": "string", "enum": ["monday", "sunday"] },
+        "defaultPriority": { "type": "string", "enum": ["low", "medium", "high", "urgent"] },
+        "defaultIntensity": { "type": "integer" },
+        "dailyFocusLimit": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "email"]
+    },
+    "tasks": {
+      "title": "Task",
+      "description": "Task item with priority, intensity, schedule, and checklist",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "status": { "type": "string", "enum": ["todo", "in_progress", "completed", "archived"] },
+        "priority": { "type": "string", "enum": ["low", "medium", "high", "urgent"] },
+        "intensity": { "type": "integer" },
+        "isDailyFocus": { "type": "boolean" },
+        "scheduledDate": { "type": "string", "maxLength": 32 },
+        "dueDate": { "type": "string", "maxLength": 32 },
+        "estimatedMinutes": { "type": "integer" },
+        "actualMinutes": { "type": "integer" },
+        "projectId": { "type": "string", "maxLength": 128 },
+        "labels": { "type": "array" },
+        "subtasks": { "type": "array" },
+        "recurrenceRule": { "type": "string", "maxLength": 64 },
+        "completedAt": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "order": { "type": "integer" }
+      },
+      "required": ["id", "userId", "title", "status", "priority", "intensity"]
+    },
+    "habits": {
+      "title": "Habit",
+      "description": "Habit definition with schedule, method, and targets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "icon": { "type": "string", "maxLength": 64 },
+        "category": { "type": "string", "maxLength": 64 },
+        "frequency": { "type": "string", "enum": ["daily", "weekdays", "weekly_target"] },
+        "targetDaysPerWeek": { "type": "integer" },
+        "trackingMethod": { "type": "string", "enum": ["binary", "numeric", "duration"] },
+        "targetValue": { "type": "number" },
+        "unit": { "type": "string", "maxLength": 32 },
+        "isArchived": { "type": "boolean" },
+        "isPaused": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "name", "frequency", "trackingMethod"]
+    },
+    "habit_logs": {
+      "title": "HabitLog",
+      "description": "Log entry recording habit completion or skipping for a date",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "habitId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 32 },
+        "status": { "type": "string", "enum": ["completed", "skipped", "missed"] },
+        "numericValue": { "type": "number" },
+        "durationMinutes": { "type": "integer" },
+        "notes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "habitId", "userId", "date", "status"]
+    },
+    "projects": {
+      "title": "Project",
+      "description": "Task group or category container",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "color": { "type": "string", "maxLength": 32 },
+        "icon": { "type": "string", "maxLength": 64 },
+        "isArchived": { "type": "boolean" },
+        "order": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "name"]
+    },
+    "focus_sessions": {
+      "title": "FocusSession",
+      "description": "Completed or recorded deep work focus timer session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "taskId": { "type": "string", "maxLength": 128 },
+        "taskTitle": { "type": "string", "maxLength": 300 },
+        "durationMinutes": { "type": "integer" },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "completedAt": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "durationMinutes"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/users" },
+      "description": "User profile document keyed by auth UID"
+    },
+    "/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/tasks" },
+      "description": "Task documents owned by individual users"
+    },
+    "/habits/{habitId}": {
+      "schema": { "$ref": "#/entities/habits" },
+      "description": "Habit definitions owned by individual users"
+    },
+    "/habit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/habit_logs" },
+      "description": "Historical daily progress logs for habits"
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/projects" },
+      "description": "User project containers"
+    },
+    "/focus_sessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/focus_sessions" },
+      "description": "Focus timer completed sessions"
+    }
+  }
+}
