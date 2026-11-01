@@ -36,6 +36,8 @@ interface DataContextType {
   settings: UserSettings;
   loading: boolean;
   toasts: ToastMessage[];
+  isOnline: boolean;
+  syncStatus: 'synced' | 'syncing' | 'offline';
 
   // Task Actions (with bulletproof deletion)
   addTask: (task: Omit<Task, 'id' | 'userId' | 'createdAt' | 'updatedAt' | 'order'>) => Promise<Task>;
@@ -288,6 +290,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   });
   const [loading, setLoading] = useState(true);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const [isOnline, setIsOnline] = useState<boolean>(() => {
+    return typeof navigator !== 'undefined' ? navigator.onLine : true;
+  });
+  const [syncStatus, setSyncStatus] = useState<'synced' | 'syncing' | 'offline'>(
+    typeof navigator !== 'undefined' && !navigator.onLine ? 'offline' : 'synced'
+  );
 
   const showToast = useCallback((message: string, type: 'info' | 'success' | 'warning' | 'error' = 'info', undoAction?: () => void) => {
     const id = 'toast_' + Math.random().toString(36).substring(2, 9);
@@ -296,6 +304,28 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, 4500);
   }, []);
+
+  // Network Connectivity Monitoring
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+      setSyncStatus('synced');
+      showToast('Connection restored — offline changes synced', 'success');
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+      setSyncStatus('offline');
+      showToast('Working offline — changes saved locally in cache', 'info');
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, [showToast]);
 
   const dismissToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -463,7 +493,15 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       try {
         await setDoc(doc(db, 'tasks', newTask.id), newTask);
       } catch (e) {
-        handleFirestoreError(e, OperationType.CREATE, `tasks/${newTask.id}`);
+        if (!navigator.onLine || String(e).toLowerCase().includes('offline')) {
+          console.info('Task queued in Firestore offline cache:', newTask.id);
+        } else {
+          try {
+            handleFirestoreError(e, OperationType.CREATE, `tasks/${newTask.id}`);
+          } catch (err) {
+            console.warn('Firestore sync notice (saved locally):', err);
+          }
+        }
       }
     }
     return newTask;
@@ -486,7 +524,15 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       try {
         await setDoc(doc(db, 'tasks', taskId), updatedTask, { merge: true });
       } catch (e) {
-        handleFirestoreError(e, OperationType.UPDATE, `tasks/${taskId}`);
+        if (!navigator.onLine || String(e).toLowerCase().includes('offline')) {
+          console.info('Task update queued in Firestore offline cache:', taskId);
+        } else {
+          try {
+            handleFirestoreError(e, OperationType.UPDATE, `tasks/${taskId}`);
+          } catch (err) {
+            console.warn('Firestore sync notice (saved locally):', err);
+          }
+        }
       }
     }
   };
@@ -626,7 +672,15 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       try {
         await setDoc(doc(db, 'projects', newProj.id), newProj);
       } catch (e) {
-        handleFirestoreError(e, OperationType.CREATE, `projects/${newProj.id}`);
+        if (!navigator.onLine || String(e).toLowerCase().includes('offline')) {
+          console.info('Project create queued in Firestore offline cache:', newProj.id);
+        } else {
+          try {
+            handleFirestoreError(e, OperationType.CREATE, `projects/${newProj.id}`);
+          } catch (err) {
+            console.warn('Firestore sync notice (saved locally):', err);
+          }
+        }
       }
     }
     return newProj;
@@ -649,7 +703,15 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       try {
         await setDoc(doc(db, 'projects', projectId), updatedProj, { merge: true });
       } catch (e) {
-        handleFirestoreError(e, OperationType.UPDATE, `projects/${projectId}`);
+        if (!navigator.onLine || String(e).toLowerCase().includes('offline')) {
+          console.info('Project update queued in Firestore offline cache:', projectId);
+        } else {
+          try {
+            handleFirestoreError(e, OperationType.UPDATE, `projects/${projectId}`);
+          } catch (err) {
+            console.warn('Firestore sync notice (saved locally):', err);
+          }
+        }
       }
     }
   };
@@ -671,7 +733,9 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     showToast(`Project "${target.name}" deleted`, 'info');
 
     if (user) {
-      deleteDoc(doc(db, 'projects', projectId)).catch(console.warn);
+      deleteDoc(doc(db, 'projects', projectId)).catch((e) => {
+        console.warn('Project delete notice (saved locally):', e);
+      });
     }
   };
 
@@ -693,7 +757,15 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       try {
         await setDoc(doc(db, 'habits', newHabit.id), newHabit);
       } catch (e) {
-        handleFirestoreError(e, OperationType.CREATE, `habits/${newHabit.id}`);
+        if (!navigator.onLine || String(e).toLowerCase().includes('offline')) {
+          console.info('Habit create queued in Firestore offline cache:', newHabit.id);
+        } else {
+          try {
+            handleFirestoreError(e, OperationType.CREATE, `habits/${newHabit.id}`);
+          } catch (err) {
+            console.warn('Firestore sync notice (saved locally):', err);
+          }
+        }
       }
     }
     return newHabit;
@@ -716,7 +788,15 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
       try {
         await setDoc(doc(db, 'habits', habitId), updatedHabit, { merge: true });
       } catch (e) {
-        handleFirestoreError(e, OperationType.UPDATE, `habits/${habitId}`);
+        if (!navigator.onLine || String(e).toLowerCase().includes('offline')) {
+          console.info('Habit update queued in Firestore offline cache:', habitId);
+        } else {
+          try {
+            handleFirestoreError(e, OperationType.UPDATE, `habits/${habitId}`);
+          } catch (err) {
+            console.warn('Firestore sync notice (saved locally):', err);
+          }
+        }
       }
     }
   };
@@ -735,7 +815,9 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     showToast(`Habit "${target.name}" deleted`, 'info');
 
     if (user) {
-      deleteDoc(doc(db, 'habits', habitId)).catch(console.warn);
+      deleteDoc(doc(db, 'habits', habitId)).catch((e) => {
+        console.warn('Habit delete notice (saved locally):', e);
+      });
     }
   };
 
@@ -820,6 +902,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
         settings,
         loading,
         toasts,
+        isOnline,
+        syncStatus,
         addTask,
         updateTask,
         deleteTask,

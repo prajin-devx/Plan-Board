@@ -5,6 +5,7 @@ import {
   Palette,
   BookOpenCheck,
   CheckCircle2,
+  WifiOff,
 } from 'lucide-react';
 import { NavigationTab } from '../../types';
 import { useData } from '../../context/DataContext';
@@ -35,7 +36,7 @@ export function Header({
   onOpenThemeModal,
   onOpenDailyReview,
 }: HeaderProps) {
-  const { tasks } = useData();
+  const { tasks, isOnline, syncStatus } = useData();
   const currentTab = TAB_TITLES[activeTab] || { title: 'Plan Board', subtitle: 'Productive Task Planner' };
 
   const completedTodayCount = tasks.filter((t) => {
@@ -58,6 +59,25 @@ export function Header({
 
       {/* Action Center */}
       <div className="flex items-center gap-2">
+        {/* Connection / Offline indicator */}
+        {!isOnline && (
+          <div
+            title="Working offline. All changes are saved locally and will sync when reconnected."
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/80 text-xs font-medium shadow-xs"
+          >
+            <WifiOff className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <span className="hidden xs:inline">Offline (Saved locally)</span>
+            <span className="xs:hidden">Offline</span>
+          </div>
+        )}
+
+        {isOnline && syncStatus === 'syncing' && (
+          <div className="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/60 text-[11px] font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" />
+            <span>Syncing</span>
+          </div>
+        )}
+
         {/* Completed today mini counter */}
         {completedTodayCount > 0 && (
           <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/60 text-xs font-medium">
