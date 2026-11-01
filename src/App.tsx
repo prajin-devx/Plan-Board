@@ -71,7 +71,7 @@ function MainAppContent() {
   };
 
   return (
-    <div className="min-h-screen flex bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 font-sans selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-950">
+    <div className="min-h-screen flex bg-gradient-to-br from-slate-50 via-sky-50/40 to-blue-50/30 dark:from-[#0b0f19] dark:via-[#0e1628] dark:to-[#0f172a] text-slate-900 dark:text-slate-100 font-sans selection:bg-blue-600 selection:text-white">
       {/* Desktop Collapsible Sidebar */}
       <Sidebar
         activeTab={activeTab}

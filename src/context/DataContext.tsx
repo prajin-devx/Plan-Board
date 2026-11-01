@@ -73,8 +73,8 @@ interface DataContextType {
 
 const DEFAULT_SETTINGS: UserSettings = {
   theme: 'light',
-  accentColor: '#10b981',
-  paletteId: 'emerald',
+  accentColor: '#2563eb',
+  paletteId: 'blue',
   fontChoice: 'jakarta',
   weekStart: 'monday',
   defaultPriority: 'medium',

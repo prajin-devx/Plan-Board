@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Calendar,
   CheckSquare,
-  Flame,
   FolderKanban,
   Inbox,
   LayoutGrid,
@@ -42,60 +41,119 @@ export function Sidebar({ activeTab, onNavigate, onOpenQuickAdd }: SidebarProps)
     });
   };
 
-  const navItems: { id: NavigationTab; label: string; icon: React.ElementType; badge?: number }[] = [
-    { id: 'today', label: 'Today', icon: Flame, badge: todayTasksCount },
-    { id: 'inbox', label: 'Inbox', icon: Inbox, badge: inboxCount },
-    { id: 'tasks', label: 'Flow & Tasks', icon: LayoutGrid, badge: tasks.filter((t) => t.status !== 'completed').length },
-    { id: 'calendar', label: 'Calendar', icon: Calendar },
-    { id: 'habits', label: 'Habits', icon: Sparkles },
-    { id: 'projects', label: 'Projects', icon: FolderKanban, badge: projects.length },
-    { id: 'insights', label: 'Insights', icon: Layers },
-    { id: 'settings', label: 'Settings', icon: Settings },
+  const navItems: {
+    id: NavigationTab;
+    label: string;
+    icon: React.ElementType;
+    badge?: number;
+    colorClass: string;
+    activeBg: string;
+  }[] = [
+    {
+      id: 'today',
+      label: 'Today',
+      icon: CheckSquare,
+      badge: todayTasksCount,
+      colorClass: 'text-blue-600 dark:text-blue-400',
+      activeBg: 'bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 border-l-[3px] border-blue-600',
+    },
+    {
+      id: 'inbox',
+      label: 'Inbox',
+      icon: Inbox,
+      badge: inboxCount,
+      colorClass: 'text-sky-500 dark:text-sky-400',
+      activeBg: 'bg-sky-500/10 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 border-l-[3px] border-sky-500',
+    },
+    {
+      id: 'tasks',
+      label: 'Flow & Tasks',
+      icon: LayoutGrid,
+      badge: tasks.filter((t) => t.status !== 'completed').length,
+      colorClass: 'text-indigo-600 dark:text-indigo-400',
+      activeBg: 'bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border-l-[3px] border-indigo-600',
+    },
+    {
+      id: 'calendar',
+      label: 'Calendar',
+      icon: Calendar,
+      colorClass: 'text-violet-600 dark:text-violet-400',
+      activeBg: 'bg-violet-500/10 dark:bg-violet-500/20 text-violet-600 dark:text-violet-400 border-l-[3px] border-violet-600',
+    },
+    {
+      id: 'habits',
+      label: 'Habits',
+      icon: Sparkles,
+      colorClass: 'text-emerald-600 dark:text-emerald-400',
+      activeBg: 'bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-l-[3px] border-emerald-600',
+    },
+    {
+      id: 'projects',
+      label: 'Workspaces',
+      icon: FolderKanban,
+      badge: projects.length,
+      colorClass: 'text-amber-600 dark:text-amber-400',
+      activeBg: 'bg-amber-500/10 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 border-l-[3px] border-amber-600',
+    },
+    {
+      id: 'insights',
+      label: 'Insights',
+      icon: Layers,
+      colorClass: 'text-fuchsia-600 dark:text-fuchsia-400',
+      activeBg: 'bg-fuchsia-500/10 dark:bg-fuchsia-500/20 text-fuchsia-600 dark:text-fuchsia-400 border-l-[3px] border-fuchsia-600',
+    },
+    {
+      id: 'settings',
+      label: 'Settings',
+      icon: Settings,
+      colorClass: 'text-slate-600 dark:text-slate-400',
+      activeBg: 'bg-slate-500/10 dark:bg-slate-500/20 text-slate-700 dark:text-slate-300 border-l-[3px] border-slate-600',
+    },
   ];
 
   return (
-    <aside className="hidden md:flex flex-col w-64 h-screen sticky top-0 bg-white dark:bg-neutral-900 border-r border-neutral-200/80 dark:border-neutral-800 shrink-0 select-none">
+    <aside className="hidden md:flex flex-col w-64 h-screen sticky top-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-blue-100/80 dark:border-slate-800 shrink-0 select-none shadow-sm">
       {/* Brand Header */}
-      <div className="p-4 border-b border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between">
+      <div className="p-4 border-b border-blue-100/60 dark:border-slate-800/80 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 flex items-center justify-center font-bold shadow-sm">
-            <CheckSquare className="w-4 h-4" />
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/25">
+            <CheckSquare className="w-4 h-4 stroke-[2.5]" />
           </div>
           <div>
-            <h1 className="text-sm font-bold tracking-tight text-neutral-900 dark:text-white flex items-center gap-1.5">
-              Plan Board
-              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-400">
-                v2.0
-              </span>
-            </h1>
-            <p className="text-[11px] text-neutral-500 dark:text-neutral-400">Task & Project Planner</p>
+            <div className="flex items-center gap-1.5">
+              <h1 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">
+                Plan Board
+              </h1>
+              <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.8)]" title="Active & Ready" />
+            </div>
+            <p className="text-[11px] text-blue-600/80 dark:text-blue-400/80 font-medium">Colorful Productivity</p>
           </div>
         </div>
 
         <button
           onClick={toggleTheme}
           aria-label="Toggle dark mode"
-          className="p-1.5 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors"
+          className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
         >
-          {settings.theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          {settings.theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-blue-600" />}
         </button>
       </div>
 
-      {/* Primary Action Button */}
+      {/* Primary Action Button (Vibrant Blue Accent Gradient) */}
       <div className="p-3">
         <button
           onClick={onOpenQuickAdd}
-          className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-950 font-medium text-xs shadow-sm transition-all active:scale-[0.98]"
+          className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-md shadow-blue-500/25 transition-all active:scale-[0.98]"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-4 h-4 stroke-[2.5]" />
           <span>New Task</span>
-          <kbd className="ml-auto text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-800 dark:bg-neutral-200 text-neutral-400 dark:text-neutral-600">
+          <kbd className="ml-auto text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/20 text-white/90">
             ⌘N
           </kbd>
         </button>
       </div>
 
-      {/* Navigation List */}
+      {/* Navigation List with Rich Color Accents */}
       <nav className="flex-1 px-3 py-1 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -106,18 +164,22 @@ export function Sidebar({ activeTab, onNavigate, onOpenQuickAdd }: SidebarProps)
               onClick={() => onNavigate(item.id)}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                 isActive
-                  ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-xs'
-                  : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800/50'
+                  ? `${item.activeBg} font-bold shadow-xs`
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? 'text-neutral-900 dark:text-white' : 'text-neutral-500'}`} />
+              <Icon
+                className={`w-4 h-4 ${
+                  isActive ? item.colorClass : 'text-slate-400 dark:text-slate-500'
+                }`}
+              />
               <span className="flex-1 text-left">{item.label}</span>
               {typeof item.badge === 'number' && item.badge > 0 && (
                 <span
-                  className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${
+                  className={`tabular-nums text-[11px] font-semibold px-2 py-0.5 rounded-full ${
                     isActive
-                      ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900'
-                      : 'bg-neutral-200/70 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300'
+                      ? 'bg-blue-600 text-white dark:bg-blue-500'
+                      : 'bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400'
                   }`}
                 >
                   {item.badge}
@@ -127,28 +189,30 @@ export function Sidebar({ activeTab, onNavigate, onOpenQuickAdd }: SidebarProps)
           );
         })}
 
-        {/* Project Section */}
+        {/* Workspaces Section */}
         <div className="pt-4 pb-2">
-          <div className="px-3 flex items-center justify-between text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">
-            <span>Boards & Projects</span>
-            <span className="text-[10px]">{projects.length}</span>
+          <div className="px-3 flex items-center justify-between text-[11px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
+            <span>Workspaces</span>
+            <span className="text-[10px] tabular-nums font-semibold bg-blue-100/80 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded-full">
+              {projects.length}
+            </span>
           </div>
-          <div className="mt-1 space-y-0.5">
+          <div className="mt-1.5 space-y-0.5">
             {projects.map((proj) => {
               const projTasksCount = tasks.filter((t) => t.projectId === proj.id && t.status !== 'completed').length;
               return (
                 <button
                   key={proj.id}
                   onClick={() => onNavigate('projects')}
-                  className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800/40 transition-colors group"
+                  className="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-slate-800/40 transition-colors group"
                 >
                   <span
-                    className="w-2 h-2 rounded-full shrink-0"
-                    style={{ backgroundColor: proj.color || '#6366f1' }}
+                    className="w-2.5 h-2.5 rounded-full shrink-0 shadow-xs"
+                    style={{ backgroundColor: proj.color || '#3b82f6' }}
                   />
-                  <span className="truncate flex-1 text-left">{proj.name}</span>
+                  <span className="truncate flex-1 text-left font-medium">{proj.name}</span>
                   {projTasksCount > 0 && (
-                    <span className="text-[10px] text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300">
+                    <span className="tabular-nums text-[11px] text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 font-semibold">
                       {projTasksCount}
                     </span>
                   )}
@@ -159,19 +223,20 @@ export function Sidebar({ activeTab, onNavigate, onOpenQuickAdd }: SidebarProps)
         </div>
       </nav>
 
-      {/* User Status Footer */}
-      <div className="p-3 border-t border-neutral-100 dark:border-neutral-800/80 bg-neutral-50/50 dark:bg-neutral-900/50">
+      {/* User Status Footer with Blue Accent */}
+      <div className="p-3 border-t border-blue-100/70 dark:border-slate-800/80 bg-blue-50/40 dark:bg-slate-900/60">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 min-w-0">
-            <div className="w-7 h-7 rounded-full bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center text-xs font-semibold text-neutral-700 dark:text-neutral-300 shrink-0">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center text-xs font-bold shadow-xs shrink-0">
               {user?.displayName ? user.displayName.charAt(0).toUpperCase() : 'P'}
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-medium text-neutral-900 dark:text-white truncate">
-                {user?.displayName || 'Personal Planner'}
+              <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                {user?.displayName || 'Personal Workspace'}
               </p>
-              <p className="text-[10px] text-neutral-500 dark:text-neutral-400 truncate">
-                {isGuest ? 'Local Mode' : 'Cloud Sync Active'}
+              <p className="text-[10px] text-blue-600 dark:text-blue-400 font-medium truncate flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                {isGuest ? 'Local Cache' : 'Cloud Sync Active'}
               </p>
             </div>
           </div>
@@ -180,17 +245,17 @@ export function Sidebar({ activeTab, onNavigate, onOpenQuickAdd }: SidebarProps)
             <button
               onClick={signInWithGoogle}
               title="Sign in with Google"
-              className="p-1.5 text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-lg transition-colors"
+              className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-100/50 dark:hover:bg-slate-800 rounded-lg transition-colors"
             >
-              <LogIn className="w-3.5 h-3.5" />
+              <LogIn className="w-4 h-4" />
             </button>
           ) : (
             <button
               onClick={signOut}
               title="Sign out"
-              className="p-1.5 text-neutral-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-lg transition-colors"
+              className="p-1.5 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
             >
-              <LogOut className="w-3.5 h-3.5" />
+              <LogOut className="w-4 h-4" />
             </button>
           )}
         </div>

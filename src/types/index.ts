@@ -161,13 +161,13 @@ export interface ColorPalette {
 }
 
 export const COLOR_PALETTES: ColorPalette[] = [
-  { id: 'emerald', name: 'Emerald Forest', accent: '#10b981', ring: 'ring-emerald-500', glow: 'bg-emerald-500/10' },
+  { id: 'blue', name: 'Cobalt Blue', accent: '#2563eb', ring: 'ring-blue-500', glow: 'bg-blue-500/10' },
   { id: 'indigo', name: 'Electric Indigo', accent: '#6366f1', ring: 'ring-indigo-500', glow: 'bg-indigo-500/10' },
+  { id: 'cyan', name: 'Ocean Cyan', accent: '#06b6d4', ring: 'ring-cyan-500', glow: 'bg-cyan-500/10' },
+  { id: 'emerald', name: 'Emerald Forest', accent: '#10b981', ring: 'ring-emerald-500', glow: 'bg-emerald-500/10' },
   { id: 'amber', name: 'Studio Amber', accent: '#f59e0b', ring: 'ring-amber-500', glow: 'bg-amber-500/10' },
   { id: 'rose', name: 'Rose Velvet', accent: '#f43f5e', ring: 'ring-rose-500', glow: 'bg-rose-500/10' },
-  { id: 'cyan', name: 'Ocean Cyan', accent: '#06b6d4', ring: 'ring-cyan-500', glow: 'bg-cyan-500/10' },
   { id: 'slate', name: 'Minimal Slate', accent: '#64748b', ring: 'ring-slate-500', glow: 'bg-slate-500/10' },
-  { id: 'obsidian', name: 'Monochrome', accent: '#171717', ring: 'ring-neutral-900 dark:ring-white', glow: 'bg-neutral-900/10' },
 ];
 
 export interface UserSettings {

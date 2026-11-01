@@ -29,7 +29,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
       <div className="relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-6 max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between pb-3 border-b border-neutral-100 dark:border-neutral-800">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-800 dark:text-neutral-200">
+            <div className="w-8 h-8 rounded-xl bg-blue-100 dark:bg-blue-950/80 flex items-center justify-center text-blue-600 dark:text-blue-400">
               <Palette className="w-4 h-4" />
             </div>
             <div>
@@ -47,7 +47,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
 
         {/* 1. Appearance / Mode */}
         <div className="space-y-2.5">
-          <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wider flex items-center gap-1.5">
+          <label className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
             <Sun className="w-3.5 h-3.5" />
             <span>Appearance Mode</span>
           </label>
@@ -65,15 +65,15 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
                   onClick={() => updateSettings({ theme: mode.id as 'light' | 'dark' | 'warm' })}
                   className={`p-3 rounded-xl border text-left transition-all ${
                     isSelected
-                      ? 'border-neutral-900 dark:border-white bg-neutral-50 dark:bg-neutral-800/80 shadow-xs'
+                      ? 'border-blue-600 dark:border-blue-400 bg-blue-50/70 dark:bg-blue-950/60 shadow-xs ring-1 ring-blue-500/20'
                       : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700'
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <Icon className={`w-4 h-4 ${isSelected ? 'text-neutral-900 dark:text-white' : 'text-neutral-400'}`} />
-                    {isSelected && <Check className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />}
+                    <Icon className={`w-4 h-4 ${isSelected ? 'text-blue-600 dark:text-blue-400' : 'text-neutral-400'}`} />
+                    {isSelected && <Check className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />}
                   </div>
-                  <p className="text-xs font-semibold text-neutral-900 dark:text-white">{mode.label}</p>
+                  <p className="text-xs font-bold text-neutral-900 dark:text-white">{mode.label}</p>
                   <p className="text-[10px] text-neutral-500 dark:text-neutral-400 leading-tight mt-0.5">{mode.desc}</p>
                 </button>
               );
@@ -83,7 +83,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
 
         {/* 2. Modern Color Palettes */}
         <div className="space-y-2.5">
-          <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wider flex items-center gap-1.5">
+          <label className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
             <Palette className="w-3.5 h-3.5" />
             <span>Accent Color Palette</span>
           </label>
@@ -96,7 +96,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
                   onClick={() => updateSettings({ paletteId: pal.id, accentColor: pal.accent })}
                   className={`p-2.5 rounded-xl border flex items-center gap-2.5 text-left transition-all ${
                     isSelected
-                      ? 'border-neutral-900 dark:border-white bg-neutral-50 dark:bg-neutral-800/60 shadow-xs ring-1 ring-neutral-900/10 dark:ring-white/10'
+                      ? 'border-blue-600 dark:border-blue-400 bg-blue-50/70 dark:bg-blue-950/60 shadow-xs ring-2 ring-blue-500/20'
                       : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700'
                   }`}
                 >
@@ -107,7 +107,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
                     {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-xs font-semibold text-neutral-900 dark:text-white truncate">{pal.name}</p>
+                    <p className={`text-xs font-bold truncate ${isSelected ? 'text-blue-950 dark:text-blue-200' : 'text-neutral-900 dark:text-white'}`}>{pal.name}</p>
                   </div>
                 </button>
               );
@@ -117,7 +117,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
 
         {/* 3. Typography / Font Choices */}
         <div className="space-y-2.5">
-          <label className="text-xs font-semibold text-neutral-500 uppercase tracking-wider flex items-center gap-1.5">
+          <label className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
             <Type className="w-3.5 h-3.5" />
             <span>Interface Typography</span>
           </label>
@@ -130,7 +130,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
                   onClick={() => updateSettings({ fontChoice: font.id })}
                   className={`w-full p-3 rounded-xl border flex items-center justify-between text-left transition-all ${
                     isSelected
-                      ? 'border-neutral-900 dark:border-white bg-neutral-50 dark:bg-neutral-800/60 shadow-xs'
+                      ? 'border-blue-600 dark:border-blue-400 bg-blue-50/70 dark:bg-blue-950/60 shadow-xs'
                       : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700'
                   }`}
                 >
@@ -144,7 +144,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
                     </p>
                   </div>
                   {isSelected && (
-                    <div className="w-5 h-5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 flex items-center justify-center shrink-0">
+                    <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-xs">
                       <Check className="w-3 h-3 stroke-[2.5]" />
                     </div>
                   )}
@@ -161,13 +161,13 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
             <div className="flex items-center gap-2.5">
               <div
                 className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: settings.accentColor || '#10b981' }}
+                style={{ backgroundColor: settings.accentColor || '#2563eb' }}
               />
-              <span className="text-xs font-semibold text-neutral-900 dark:text-white">Active Milestone Card</span>
+              <span className="text-xs font-bold text-neutral-900 dark:text-white">Active Milestone Card</span>
             </div>
             <span
-              className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white"
-              style={{ backgroundColor: settings.accentColor || '#10b981' }}
+              className="text-[10px] font-bold px-2 py-0.5 rounded-full text-white shadow-xs"
+              style={{ backgroundColor: settings.accentColor || '#2563eb' }}
             >
               On Track
             </span>
@@ -177,7 +177,7 @@ export function ThemeCustomizerModal({ isOpen, onClose }: ThemeCustomizerModalPr
         <div className="pt-2 flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-semibold text-xs shadow-sm hover:opacity-90 transition-opacity"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-blue-500/25 active:scale-95 transition-all"
           >
             Apply & Close
           </button>

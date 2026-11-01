@@ -54,15 +54,15 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
                 key={idx}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   idx === step
-                    ? 'w-7 bg-neutral-900 dark:bg-white'
+                    ? 'w-7 bg-blue-600 dark:bg-blue-400'
                     : idx < step
-                    ? 'w-3 bg-neutral-400 dark:bg-neutral-600'
+                    ? 'w-3 bg-blue-200 dark:bg-blue-900/60'
                     : 'w-2 bg-neutral-200 dark:bg-neutral-800'
                 }`}
               />
             ))}
           </div>
-          <span className="text-[11px] font-semibold text-neutral-400">
+          <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400">
             Step {step + 1} of {totalSteps}
           </span>
         </div>
@@ -70,32 +70,32 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
         {/* STEP 0: Welcome */}
         {step === 0 && (
           <div className="space-y-4 text-center py-2 animate-in fade-in slide-in-from-right-4 duration-200">
-            <div className="w-16 h-16 rounded-2xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 flex items-center justify-center mx-auto shadow-md">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center mx-auto shadow-lg shadow-blue-500/30">
               <CheckSquare className="w-8 h-8" />
             </div>
             <div>
-              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
+              <h2 className="text-xl md:text-2xl font-black tracking-tight text-neutral-900 dark:text-white">
                 Welcome to Plan Board
               </h2>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-2 max-w-sm mx-auto leading-relaxed">
-                A refined, modern productivity board combining visual Flow, energy-based task intensity, and habit consistency.
+              <p className="text-sm text-neutral-600 dark:text-neutral-300 mt-2 max-w-sm mx-auto leading-relaxed">
+                A colorful, modern productivity board combining visual Flow, energy-based task intensity, and habit consistency.
               </p>
             </div>
 
             <div className="grid grid-cols-3 gap-2.5 pt-2 text-left">
-              <div className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-100 dark:border-neutral-800">
-                <LayoutGrid className="w-4 h-4 text-neutral-700 dark:text-neutral-300 mb-1" />
+              <div className="p-3 rounded-xl bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200/60 dark:border-blue-900/40">
+                <LayoutGrid className="w-4 h-4 text-blue-600 dark:text-blue-400 mb-1" />
                 <p className="text-xs font-bold text-neutral-900 dark:text-white">Visual Flow</p>
                 <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5">Fluid progress & stage momentum</p>
               </div>
-              <div className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-100 dark:border-neutral-800">
+              <div className="p-3 rounded-xl bg-amber-50/60 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/40">
                 <Zap className="w-4 h-4 text-amber-500 mb-1" />
                 <p className="text-xs font-bold text-neutral-900 dark:text-white">Task Intensity</p>
                 <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5">Energy & cognitive weighting</p>
               </div>
-              <div className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-100 dark:border-neutral-800">
+              <div className="p-3 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-900/40">
                 <Sparkles className="w-4 h-4 text-emerald-500 mb-1" />
-                <p className="text-xs font-bold text-neutral-900 dark:text-white">Clean Themes</p>
+                <p className="text-xs font-bold text-neutral-900 dark:text-white">Vibrant Themes</p>
                 <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-0.5">Custom color palettes & fonts</p>
               </div>
             </div>
@@ -106,7 +106,7 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
         {step === 1 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
             <div className="text-center">
-              <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto mb-2">
+              <div className="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto mb-2">
                 <Zap className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-neutral-900 dark:text-white">5-Level Task Intensity</h3>
@@ -145,7 +145,7 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
         {step === 2 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
             <div className="text-center">
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mx-auto mb-2">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto mb-2">
                 <LayoutGrid className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Flow, Lists & Calendar</h3>
@@ -155,22 +155,22 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
             </div>
 
             <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="p-3.5 rounded-2xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-700/80 space-y-1.5">
-                <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-semibold text-xs">
-                  <LayoutGrid className="w-4 h-4 text-indigo-500" />
+              <div className="p-3.5 rounded-2xl bg-blue-50/50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-900/60 space-y-1.5">
+                <div className="flex items-center gap-2 text-blue-900 dark:text-blue-200 font-bold text-xs">
+                  <LayoutGrid className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   <span>Flow Board</span>
                 </div>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                <p className="text-[11px] text-neutral-600 dark:text-neutral-300 leading-relaxed">
                   To-Do, In Progress, and Done stages with fluid progress and instant deletion.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-700/80 space-y-1.5">
-                <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-semibold text-xs">
-                  <Calendar className="w-4 h-4 text-emerald-500" />
+              <div className="p-3.5 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-900/60 space-y-1.5">
+                <div className="flex items-center gap-2 text-emerald-900 dark:text-emerald-200 font-bold text-xs">
+                  <Calendar className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>Calendar Schedule</span>
                 </div>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                <p className="text-[11px] text-neutral-600 dark:text-neutral-300 leading-relaxed">
                   Map due dates to dates, plan weekly workload, and avoid last-minute deadline stress.
                 </p>
               </div>
@@ -182,7 +182,7 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
         {step === 3 && (
           <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-200">
             <div className="text-center">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto mb-2">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto mb-2">
                 <Palette className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-neutral-900 dark:text-white">Choose Your Starter Aesthetic</h3>
@@ -200,15 +200,15 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
                     onClick={() => updateSettings({ paletteId: pal.id, accentColor: pal.accent })}
                     className={`p-3 rounded-xl border flex items-center gap-2.5 text-left transition-all ${
                       isSelected
-                        ? 'border-neutral-900 dark:border-white bg-neutral-50 dark:bg-neutral-800/80 shadow-xs'
+                        ? 'border-blue-600 dark:border-blue-400 bg-blue-50/80 dark:bg-blue-950/80 shadow-xs ring-2 ring-blue-500/20'
                         : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-300'
                     }`}
                   >
                     <span
-                      className="w-4 h-4 rounded-full shrink-0"
+                      className="w-4 h-4 rounded-full shrink-0 shadow-xs"
                       style={{ backgroundColor: pal.accent }}
                     />
-                    <span className="text-xs font-semibold text-neutral-900 dark:text-white">{pal.name}</span>
+                    <span className={`text-xs font-semibold ${isSelected ? 'text-blue-950 dark:text-blue-200' : 'text-neutral-900 dark:text-white'}`}>{pal.name}</span>
                   </button>
                 );
               })}
@@ -221,7 +221,7 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
           {step > 0 ? (
             <button
               onClick={handleBack}
-              className="flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back</span>
@@ -232,7 +232,7 @@ export function OnboardingModal({ isOpen, onComplete }: OnboardingModalProps) {
 
           <button
             onClick={handleNext}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-100 text-white dark:text-neutral-950 font-semibold text-xs shadow-md transition-all active:scale-95"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-blue-500/25 transition-all active:scale-95"
           >
             <span>{step === totalSteps - 1 ? 'Start Planning' : 'Continue'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
